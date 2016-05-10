@@ -18,6 +18,7 @@ from astropy.io import fits
 from scipy.optimize import curve_fit
 from scipy import asarray as ar,exp
 from PyAstronomy import pyasl
+import copy
 
 LARGE_FONT = ("Verdana", 12)
 STND_FONT = ("Helvetica", 8)
@@ -136,7 +137,14 @@ class SpectraApp(tk.Tk):
 
     def SetLimitFunc(self):
 
+        #xmin = XMinInput.get()
+        #xmax = XMaxInput.get()
+        
         #grab limit values from entry
+        #how to make EntryName.get() be able to find EntryName in __init__
+        #self.EntryName doesn't work
+        #EntryName can't be defined as global
+        #passing self as argument to EntryName.get() doesn't help
         print("Not yet!")
 
 app = SpectraApp()
