@@ -27,6 +27,7 @@ style.use("ggplot")
 
 x = None
 y = None
+data = None
 
 class SpectraApp(tk.Tk):
 
@@ -87,6 +88,9 @@ class SpectraApp(tk.Tk):
 
         SetXMax = ttk.Button(self, text = "Set", command = lambda: self.SetLimitFunc())
         SetXMax.grid(row = 3, column = 5, sticky = 'E')
+
+        PrintMax = ttk.Button(self, text ="Find Maximum", command = lambda: self.FitSpectra())
+        PrintMax.grid(row = 4, column = 2, sticky = 'S')
         
     def OpenPlot(self):
 
@@ -94,6 +98,7 @@ class SpectraApp(tk.Tk):
 
             global x
             global y
+            global data
 
             ftypes = [('Data files', '*.dat'), ('All files', '*')]
             dlg = tkFileDialog.Open(self, filetypes = ftypes)
@@ -146,6 +151,18 @@ class SpectraApp(tk.Tk):
         #EntryName can't be defined as global
         #passing self as argument to EntryName.get() doesn't help
         print("Not yet!")
+
+    def FitSpectra(self):
+
+        if data != None:
+            epos, mi = pyasl.quadExtreme(x, y, mode ="max", dp = (5, 5))
+            print (mi)
+            print (data[mi, 1])
+            print (epos)
+        else:
+            print("No data has been entered.")
+
+        #print("Not yet!")
 
 app = SpectraApp()
 app.mainloop()
