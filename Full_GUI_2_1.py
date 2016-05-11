@@ -3,6 +3,7 @@ from __future__ import print_function, division
 import Tkinter as tk
 import ttk
 import tkFileDialog
+import tkMessageBox as mbox
 
 import matplotlib
 matplotlib.use("TkAgg")
@@ -150,19 +151,21 @@ class SpectraApp(tk.Tk):
         #self.EntryName doesn't work
         #EntryName can't be defined as global
         #passing self as argument to EntryName.get() doesn't help
-        print("Not yet!")
+        mbox.showerror("Error", "This feature is not available")
 
     def FitSpectra(self):
 
         if data != None:
             epos, mi = pyasl.quadExtreme(x, y, mode ="max", dp = (5, 5))
+           
             print (mi)
             print (data[mi, 1])
             print (epos)
-        else:
-            print("No data has been entered.")
 
-        #print("Not yet!")
+            mbox.showinfo("Quadratic Fitting Results\n")
+             
+        else:
+            mbox.showerror("Error", "No data has been entered")
 
 app = SpectraApp()
 app.mainloop()
