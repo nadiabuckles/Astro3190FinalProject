@@ -151,19 +151,17 @@ class SpectraApp(tk.Tk):
         #self.EntryName doesn't work
         #EntryName can't be defined as global
         #passing self as argument to EntryName.get() doesn't help
+        #passing EntryName as a function argument doesn't work
         mbox.showerror("Error", "This feature is not available")
 
     def FitSpectra(self):
 
         if data != None:
             epos, mi = pyasl.quadExtreme(x, y, mode ="max", dp = (5, 5))
-           
-            print (mi)
-            print (data[mi, 1])
-            print (epos)
 
-            mbox.showinfo("Quadratic Fitting Results\n")
-             
+            fitinfo = [('Index of Maximum', mi), ('Value at Maximum', data[mi, 1]), ('Maximum found by parabolic fit', epos)]
+
+            mbox.showinfo("Quadratic Fitting Results\n", fitinfo) 
         else:
             mbox.showerror("Error", "No data has been entered")
 
